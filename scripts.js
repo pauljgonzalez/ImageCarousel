@@ -17,6 +17,7 @@ const pictureArray = [
 const pictureArrayLength = pictureArray.length - 1
 let currentImageIndex = 0
 upperSection.style.backgroundImage = `url('${pictureArray[0]}')`
+
 upperButtons.forEach((button) =>{
     button.addEventListener("mouseenter",()=>{
         button.style.opacity = 1
@@ -34,6 +35,8 @@ previousButton.addEventListener("click",() => {
         updateCurrentImageUpper(currentImageIndex)
     }
     checkCurrentImage()
+    clearInterval(slideShowInterval)
+    slideShowInterval = setInterval(slideshowtimer, 5000)
 })
 nextButton.addEventListener("click",() => {
     if(currentImageIndex === pictureArrayLength){
@@ -44,6 +47,8 @@ nextButton.addEventListener("click",() => {
         updateCurrentImageUpper(currentImageIndex)
     }
     checkCurrentImage()
+    clearInterval(slideShowInterval)
+    slideShowInterval = setInterval(slideshowtimer, 5000)
 })
 function updateCurrentImageUpper(image){
     upperSection.style.transition = "background-image 0.6s ease";
@@ -91,6 +96,8 @@ function checkCurrentImage(){
 }
 checkCurrentImage()
 
+let slideShowInterval
+
 function slideshowtimer(){
     if(currentImageIndex === pictureArrayLength){
         currentImageIndex = 0
@@ -101,4 +108,8 @@ function slideshowtimer(){
     }
     checkCurrentImage()
 }
-setInterval(slideshowtimer, 5000)
+function startSlideShow(){
+    clearInterval(slideShowInterval)
+    slideShowInterval = setInterval(slideshowtimer, 5000)
+}
+startSlideShow()
